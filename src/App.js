@@ -54,14 +54,18 @@ export default function App() {
       const geoData = await geoRes.json();
       if (!geoData.results) throw new Error("Location not found");
 
-      const { latitude, longitude, timezone, name, country_code } =
-        geoData.results[0];
+      const { latitude, longitude, name, country_code } = geoData.results[0];
+      const timezone =
+        Intl.DateTimeFormat().resolvedOptions().timeZone || "auto";
       setDisplayLocation(`${name} ${convertToFlag(country_code)}`);
 
       // 2) Fetch weather
       const weatherRes = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`
       );
+
+      if (!weatherRes.ok) throw new Error("Weather fetch failed");
+
       const weatherData = await weatherRes.json();
       setWeather(weatherData.daily);
     } catch (err) {
