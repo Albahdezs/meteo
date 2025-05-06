@@ -52,7 +52,10 @@ export default function App() {
         `https://geocoding-api.open-meteo.com/v1/search?name=${location}`
       );
       const geoData = await geoRes.json();
-      if (!geoData.results) throw new Error("Location not found");
+
+      if (!geoData.results || geoData.results.length === 0) {
+        throw new Error("Location not found");
+      }
 
       const { latitude, longitude, name, country_code } = geoData.results[0];
       const timezone =
@@ -67,9 +70,15 @@ export default function App() {
       if (!weatherRes.ok) throw new Error("Weather fetch failed");
 
       const weatherData = await weatherRes.json();
+
+      if (!weatherData.daily) {
+        throw new Error("Weather data is missing");
+      }
+
       setWeather(weatherData.daily);
     } catch (err) {
-      console.error(err);
+      console.error("Error fetching weather:", err);
+      setWeather({});
     } finally {
       setIsLoading(false);
     }
