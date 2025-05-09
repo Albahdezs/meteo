@@ -26,7 +26,7 @@ function convertToFlag(countryCode) {
 }
 
 function formatDay(dateStr) {
-  return new Intl.DateTimeFormat("en", { weekday: "short" }).format(
+  return new Intl.DateTimeFormat("es", { weekday: "short" }).format(
     new Date(dateStr)
   );
 }
@@ -95,7 +95,7 @@ export default function App() {
       <h1>Meteo</h1>
       <Input value={location} onChange={(e) => setLocation(e.target.value)} />
 
-      {isLoading && <p className="loader">Loading...</p>}
+      {isLoading && <p className="loader">Cargando...</p>}
 
       {weather.weathercode && (
         <Weather weather={weather} location={displayLocation} />
@@ -109,7 +109,7 @@ function Input({ value, onChange }) {
     <div>
       <input
         type="text"
-        placeholder="Search for location..."
+        placeholder="Busca una ciudad..."
         value={value}
         onChange={onChange}
       />
@@ -153,9 +153,9 @@ function Weather({ weather, location }) {
 
 function Day({ date, max, min, code, isToday }) {
   return (
-    <li className={`day ${isToday ? "today" : ""}`}>
+    <li className={`day ${isToday ? "hoy" : ""}`}>
       <span>{getWeatherIcon(code)}</span>
-      <p>{isToday ? "Today" : formatDay(date)}</p>
+      <p>{isToday ? "Hoy" : formatDay(date)}</p>
       <p>
         {Math.floor(min)}° — <strong>{Math.ceil(max)}°</strong>
       </p>
