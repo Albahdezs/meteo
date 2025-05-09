@@ -92,7 +92,7 @@ export default function App() {
 
   return (
     <div className="app">
-      <h1>Classy Weather</h1>
+      <h1>Meteo</h1>
       <Input value={location} onChange={(e) => setLocation(e.target.value)} />
 
       {isLoading && <p className="loader">Loading...</p>}
@@ -131,7 +131,7 @@ function Weather({ weather, location }) {
 
   return (
     <div>
-      <h2>Weather {location}</h2>
+      <h2>El tiempo en {location}</h2>
       <ul className="weather">
         {dates.map((date, i) => {
           const todayStr = new Date().toISOString().split("T")[0];
