@@ -7,13 +7,21 @@
 
 ## 🚀 Características
 
-- 🔍 Busca cualquier ciudad y obtén datos meteorológicos al instante
+- 🔍 Busca cualquier ciudad _(introducida en inglés)_ y obtén datos meteorológicos al instante
 - 🌐 Impulsado por [Open-Meteo Geocoding API](https://open-meteo.com/)
 - ⚡ Rápido y liviano
 - 🎯 Construido con **Create React App**
 - 📄 Diseño simple para acceso y pruebas rápidas
 
 ---
+
+## 🎆 Imágenes
+
+![Inicio](assets/inicio.png)<br />
+![Ciudad](assets/ciudad.png)
+
+
+--
 
 ## 🛠 Tecnologías
 
