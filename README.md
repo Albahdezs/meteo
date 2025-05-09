@@ -1,52 +1,51 @@
-# 🌦️ Classy Weather
+# 🌦️ Meteo
 
-Classy Weather is a simple, elegant weather application built with **React**. It allows users to search for any city worldwide and instantly get the current weather conditions. The project uses the **Open-Meteo Geocoding API** to resolve city names and fetch data.
+**Meteo** es una aplicación del tiempo simple y elegante construida con **React**. Permite a los usuarios buscar cualquier ciudad del mundo y obtener instantáneamente las condiciones meteorológicas actuales. El proyecto utiliza la **API de Geocodificación de Open-Meteo** para resolver nombres de ciudades y obtener los datos del clima.
 
-> ⚠️ This app is a static landing page and is **not responsive**.
+> ⚠️ Esta app es una página estática y **no es responsiva**.
+---
+
+## 🚀 Características
+
+- 🔍 Busca cualquier ciudad y obtén datos meteorológicos al instante
+- 🌐 Impulsado por [Open-Meteo Geocoding API](https://open-meteo.com/)
+- ⚡ Rápido y liviano
+- 🎯 Construido con **Create React App**
+- 📄 Diseño simple para acceso y pruebas rápidas
 
 ---
 
-## 🚀 Features
+## 🛠 Tecnologías
 
-- 🔍 Search for any city and get weather data instantly
-- 🌐 Powered by [Open-Meteo Geocoding API](https://open-meteo.com/)
-- ⚡ Fast and lightweight
-- 🎯 Built with **Create React App**
-- 📄 Simple layout for quick access and testing
-
----
-
-## 🛠 Tech Stack
-
-- **React** (with Create React App)
+- **React** (con Create React App)
 - **Open-Meteo API**
 - **HTML / CSS / JavaScript**
-- **GitHub Pages** for deployment
+- **GitHub Pages** para despliegue
 
 ---
 
-## 🔧 Setup
+## 🔧 Instalación
 
-1. Clone the repo:
+1. Clona el repositorio:
 
 ```bash
-git clone https://github.com/Albahdezs/classy-weather.git
-cd classy-weather
+git clone https://github.com/Albahdezs/meteo.git
+cd meteo
 ```
 
-2. Install dependencies:
+2. Instala dependencias:
 
 ```bash
 npm install
 ```
 
-3. Start development server:
+3. Inicia el servidor de desarrollo:
 
 ```bash
 npm start
 ```
 
-4. Build for production:
+4. Compila para producción:
 
 ```bash
 npm run build
@@ -54,11 +53,11 @@ npm run build
 
 ---
 
-## 📬 Contact
+## 📬 Contacto
 
-Created by [@Albahdezs](https://github.com/Albahdezs) – feel free to reach out!
+Created by [@Albahdezs](https://github.com/Albahdezs) – ¡no dudes en contactarme!
 
-If you have any suggestions or feedback, feel free to open an issue or contact me via GitHub.
+Si tienes sugerencias o comentarios, puedes abrir un issue o escribirme a través de GitHub.
 Email: alba.hdez.serr@gmail.com
 
 
