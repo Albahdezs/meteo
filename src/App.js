@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
+// wmoCode es el código del clima
 function getWeatherIcon(wmoCode) {
   const icons = new Map([
     [[0], "☀️"],
@@ -13,10 +14,13 @@ function getWeatherIcon(wmoCode) {
     [[95], "🌩"],
     [[96, 99], "⛈"],
   ]);
+  
+  // Array con find e includes para buscar el código meteorológico 
   const arr = [...icons.keys()].find((key) => key.includes(wmoCode));
   return arr ? icons.get(arr) : "NOT FOUND";
 }
 
+// Convierte a flag el countryCode de la API 
 function convertToFlag(countryCode) {
   const codePoints = countryCode
     .toUpperCase()
@@ -25,6 +29,7 @@ function convertToFlag(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
+// Formateo de la fecha
 function formatDay(dateStr) {
   return new Intl.DateTimeFormat("es", { weekday: "short" }).format(
     new Date(dateStr)
@@ -32,6 +37,7 @@ function formatDay(dateStr) {
 }
 
 export default function App() {
+  // Lazy inicialization. Si no encuentra location devuelve null 
   const [location, setLocation] = useState(
     () => localStorage.getItem("location") || ""
   );
@@ -39,6 +45,7 @@ export default function App() {
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
+// useCallback para memorizar función y no recrearse en el useEffect
   const fetchWeather = useCallback(async () => {
     if (location.length < 2) {
       setWeather({});
@@ -84,7 +91,7 @@ export default function App() {
     }
   }, [location]);
 
-  // Fetch on mount and whenever location changes
+// Petición una vez montada y con cada cambio de localización 
   useEffect(() => {
     fetchWeather();
     localStorage.setItem("location", location);
@@ -118,10 +125,12 @@ function Input({ value, onChange }) {
 }
 
 function Weather({ weather, location }) {
+  // Desmonta el componente para limpiarlo
   useEffect(() => {
     return () => console.log("Weather unmounted");
   }, []);
-
+  
+// Desestructuración del componente para trabajar mejor
   const {
     temperature_2m_max: max,
     temperature_2m_min: min,
