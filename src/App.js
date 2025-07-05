@@ -29,7 +29,7 @@ function convertToFlag(countryCode) {
   return String.fromCodePoint(...codePoints);
 }
 
-// Formateo de la fecha
+// Da formato a una cadena de fecha para mostrar el día de la semana abreviado en español
 function formatDay(dateStr) {
   return new Intl.DateTimeFormat("es", { weekday: "short" }).format(
     new Date(dateStr)
@@ -38,10 +38,12 @@ function formatDay(dateStr) {
 
 export default function App() {
   // Lazy inicialization. Si no encuentra location devuelve null 
+  // Almacena la ciudad introducida por le usuario
   const [location, setLocation] = useState(
     () => localStorage.getItem("location") || ""
   );
   const [displayLocation, setDisplayLocation] = useState("");
+  // Guarda los datos de la API
   const [weather, setWeather] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,7 +56,7 @@ export default function App() {
 
     setIsLoading(true);
     try {
-      // 1) Geocoding
+      // 1) Geocoding -> Obtiene latitud y longitud y otros datos de la ciudad
       const geoRes = await fetch(
         `https://geocoding-api.open-meteo.com/v1/search?name=${location}`
       );
@@ -69,7 +71,7 @@ export default function App() {
         Intl.DateTimeFormat().resolvedOptions().timeZone || "auto";
       setDisplayLocation(`${name} ${convertToFlag(country_code)}`);
 
-      // 2) Fetch weather
+      // 2) Fetch weather -> Obtiene la predicción diaria
       const weatherRes = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&daily=weathercode,temperature_2m_max,temperature_2m_min`
       );
@@ -91,7 +93,7 @@ export default function App() {
     }
   }, [location]);
 
-// Petición una vez montada y con cada cambio de localización 
+// Llama a fetchWeather cada vez que cambia la location y la guarda en localStorage
   useEffect(() => {
     fetchWeather();
     localStorage.setItem("location", location);
@@ -100,10 +102,12 @@ export default function App() {
   return (
     <div className="app">
       <h1>Meteo</h1>
+// Muestra un campo de búsqueda 
       <Input value={location} onChange={(e) => setLocation(e.target.value)} />
 
       {isLoading && <p className="loader">Cargando...</p>}
 
+// Si hay datos disponibles muestra la previsión meteorológica
       {weather.weathercode && (
         <Weather weather={weather} location={displayLocation} />
       )}
@@ -111,6 +115,8 @@ export default function App() {
   );
 }
 
+// SUBCOMPONENTES
+// Input para la ciudad
 function Input({ value, onChange }) {
   return (
     <div>
@@ -123,6 +129,7 @@ function Input({ value, onChange }) {
     </div>
   );
 }
+
 
 function Weather({ weather, location }) {
   // Desmonta el componente para limpiarlo
@@ -160,6 +167,7 @@ function Weather({ weather, location }) {
   );
 }
 
+// Previsión del día de hoy
 function Day({ date, max, min, code, isToday }) {
   return (
     <li className={`day ${isToday ? "hoy" : ""}`}>
